@@ -1,6 +1,6 @@
 import csv
 FILENAMES = ["data/daily_sales_data_0.csv","data/daily_sales_data_1.csv", "data/daily_sales_data_2.csv"]
-NEWFILENAME = "data/processed_data"
+NEWFILENAME = "data/processed_data.csv"
 
 def filter_pink_morsels(productName: str):
     return productName == "pink morsel"
@@ -14,14 +14,14 @@ def main():
     processedData=[["product","sales","date","region"]]
 
     for filename in FILENAMES:
-        with open(filename, newline='') as csvfile:
+        with open(filename) as csvfile:
             filereader = csv.DictReader(csvfile)
             for row in filereader:
                 if filter_pink_morsels(row["product"]):
                     sales = calc_sales(row["price"], row["quantity"])
-                    processedData.append([','.join([row['product'], str(sales), row['date'], row['region']])])
+                    processedData.append([row['product'], str(sales), row['date'], row['region']])
 
-    with open(NEWFILENAME, mode="w", newline="") as csvfile:
+    with open(NEWFILENAME, mode="w") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerows(processedData)
 
