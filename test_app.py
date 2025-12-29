@@ -119,7 +119,7 @@ def test_001_child_with_0(dash_duo):
     timeout=4
     )
     dash_duo.wait_for_element("#example-graph", timeout=4)
-    dash_duo.wait_for_element("#filter-by-region", timeout=400)
+    dash_duo.wait_for_element("#filter-by-region", timeout=4)
     dash_duo.multiple_click("#filter-by-region", 1)
     # 6. use this form if its present is expected at the action point
     #assert dash_duo.find_element("#nully-wrapper").text == "0"
